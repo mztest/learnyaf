@@ -1,9 +1,10 @@
 <?php
 
-class IndexController extends Yaf\Controller_Abstract
+class IndexController extends BaseController
 {
     public function indexAction()
     {
+        $this->getLayout()->setLayout('home.phtml');
         $this->getView()->assign('name', 'Index');
     }
 }
