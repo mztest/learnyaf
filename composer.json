@@ -1,0 +1,14 @@
+{
+    "name": "mztest/learnyaf",
+    "description": "Learn Yaf",
+    "require": {
+        "php": ">=5.4.0"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Guo Xiaosong",
+            "email": "mztester@gmail.com"
+        }
+    ]
+}
