@@ -2,7 +2,9 @@
     "name": "mztest/learnyaf",
     "description": "Learn Yaf",
     "require": {
-        "php": ">=5.4.0"
+        "php": ">=5.4.0",
+        "monolog/monolog": "1.13.*",
+        "illuminate/database": "5.1.*@dev"
     },
     "license": "MIT",
     "authors": [
@@ -10,5 +12,6 @@
             "name": "Guo Xiaosong",
             "email": "mztester@gmail.com"
         }
-    ]
+    ],
+    "minimum-stability": "dev"
 }
