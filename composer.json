@@ -4,7 +4,11 @@
     "require": {
         "php": ">=5.4.0",
         "monolog/monolog": "1.13.*",
-        "illuminate/database": "5.1.*@dev"
+        "illuminate/database": "5.1.*@dev",
+        "illuminate/console": "5.1.*",
+        "illuminate/pagination": "5.1.*@dev",
+        "illuminate/events": "5.1.*",
+        "illuminate/filesystem": "5.1.*"
     },
     "license": "MIT",
     "authors": [
