@@ -1,11 +1,20 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<title><?php echo $this->layout['title']; ?></title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title><?php echo $this->layout['title']; ?></title>
+    <!-- Bootstrap -->
+    <link href="/bootstrap-3.3.4/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/bootstrap-3.3.4/css/bootstrap-theme.min.css" rel="stylesheet">
+    <link href="/css/site.css" rel="stylesheet">
 </head>
-<body>
-<h1>Default template</h1>
-<?php echo $this->content; ?>
+<body role="document">
+<?php echo $this->render('header.phtml'); ?>
+<div class="container" role="main">
+    <?php echo $this->content; ?>
+</div>
+<?php echo $this->render('footer.phtml'); ?>
 </body>
 </html>
