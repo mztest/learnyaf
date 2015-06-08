@@ -55,7 +55,15 @@ class LayoutPlugin extends \Yaf\Plugin_Abstract
      * @param \Yaf\Request_Abstract $request
      * @param \Yaf\Response_Abstract $response
      */
-    public function dispatchLoopShutdown(Request $request, Response $response)
+    public function routerStartup(Request $request, Response $response)
+    {
+    }
+    /**
+     *
+     * @param \Yaf\Request_Abstract $request
+     * @param \Yaf\Response_Abstract $response
+     */
+    public function routerShutdown(Request $request, Response $response)
     {
     }
     /**
@@ -66,6 +74,15 @@ class LayoutPlugin extends \Yaf\Plugin_Abstract
     public function dispatchLoopStartup(Request $request, Response $response)
     {
     }
+    /**
+     *
+     * @param \Yaf\Request_Abstract $request
+     * @param \Yaf\Response_Abstract $response
+     */
+    public function preDispatch(Request $request, Response $response)
+    {
+    }
+
     /**
      *
      * @param \Yaf\Request_Abstract $request
@@ -92,31 +109,9 @@ class LayoutPlugin extends \Yaf\Plugin_Abstract
      * @param \Yaf\Request_Abstract $request
      * @param \Yaf\Response_Abstract $response
      */
-    public function preDispatch(Request $request, Response $response)
+    public function dispatchLoopShutdown(Request $request, Response $response)
     {
     }
-    /**
-     *
-     * @param \Yaf\Request_Abstract $request
-     * @param \Yaf\Response_Abstract $response
-     */
-    public function preResponse(Request $request, Response $response)
-    {
-    }
-    /**
-     *
-     * @param \Yaf\Request_Abstract $request
-     * @param \Yaf\Response_Abstract $response
-     */
-    public function routerShutdown(Request $request, Response $response)
-    {
-    }
-    /**
-     *
-     * @param \Yaf\Request_Abstract $request
-     * @param \Yaf\Response_Abstract $response
-     */
-    public function routerStartup(Request $request, Response $response)
-    {
-    }
+
+
 }

@@ -37,6 +37,7 @@ class Bootstrap extends \Yaf\Bootstrap_Abstract {
         
         Yaf\Registry::set('Capsule', $capsule->getConnection());
     }
+
     /**
      *
      * @param \Yaf\Dispatcher $dispatcher            
@@ -59,6 +60,8 @@ class Bootstrap extends \Yaf\Bootstrap_Abstract {
         \Yaf\Registry::set('Layout', $layout);
         /* add the plugin to the dispatcher */
         $dispatcher->registerPlugin($layout);
+
+        // $dispatcher->registerPlugin(new DummyPlugin());
     }
     public function _initView(\Yaf\Dispatcher $dispatcher) {
         // 在这里注册自己的view控制器，例如smarty,firekylin
