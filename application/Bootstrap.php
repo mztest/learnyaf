@@ -8,6 +8,9 @@
  * 调用的次序, 和申明的次序相同
  */
 use Illuminate\Database\Capsule\Manager as Capsule;
+use Illuminate\Events\Dispatcher;
+use Illuminate\Container\Container;
+
 class Bootstrap extends Yaf\Bootstrap_Abstract {
     public function _initConfig() {
         // 把配置保存起来
@@ -28,6 +31,8 @@ class Bootstrap extends Yaf\Bootstrap_Abstract {
         $capsule = new Capsule;
         
         $capsule->addConnection($database);
+
+        $capsule->setEventDispatcher(new Dispatcher(new Container));
         
         // Make this Capsule instance available globally via static methods... (optional)
         $capsule->setAsGlobal();
@@ -36,6 +41,7 @@ class Bootstrap extends Yaf\Bootstrap_Abstract {
         $capsule->bootEloquent();
         
         Yaf\Registry::set('Capsule', $capsule->getConnection());
+        Yaf\Registry::set('CapsuleDatabaseManager', $capsule->getDatabaseManager());
     }
 
     /**

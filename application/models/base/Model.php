@@ -10,7 +10,7 @@ abstract class Model extends Object implements Arrayable
 {
     use ArrayableTrait, ValidatesModels;
 
-    private $_errors;
+//    private $_errors;
 
     /**
      * Returns the form name that this model class should use.
@@ -97,8 +97,61 @@ abstract class Model extends Object implements Arrayable
         return $names;
     }
 
-    public function getErrors()
+    /**
+     * @param string $attribute
+     * @return array
+     */
+    public function getErrors($attribute = null)
     {
-        return $this->_errors;
+        if ($attribute === null) {
+            return $this->_errors === null ? [] : $this->_errors;
+        } else {
+            return isset($this->_errors[$attribute]) ? $this->_errors[$attribute] : [];
+        }
+    }
+
+    /**
+     * Returns a value indicating whether there is any validation error.
+     * @param string|null $attribute attribute name. Use null to check all attributes.
+     * @return boolean whether there is any error.
+     */
+    public function hasErrors($attribute = null)
+    {
+        return $attribute === null ? !empty($this->_errors) : isset($this->_errors[$attribute]);
+    }
+
+    /**
+     * Returns the first error of every attribute in the model.
+     * @return array the first errors. The array keys are the attribute names, and the array
+     * values are the corresponding error messages. An empty array will be returned if there is no error.
+     * @see getErrors()
+     * @see getFirstError()
+     */
+    public function getFirstErrors()
+    {
+        if (empty($this->_errors)) {
+            return [];
+        } else {
+            $errors = [];
+            foreach ($this->_errors as $name => $es) {
+                if (!empty($es)) {
+                    $errors[$name] = reset($es);
+                }
+            }
+
+            return $errors;
+        }
+    }
+
+    /**
+     * Returns the first error of the specified attribute.
+     * @param string $attribute attribute name.
+     * @return string the error message. Null is returned if no error.
+     * @see getErrors()
+     * @see getFirstErrors()
+     */
+    public function getFirstError($attribute)
+    {
+        return isset($this->_errors[$attribute]) ? reset($this->_errors[$attribute]) : null;
     }
 }

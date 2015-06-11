@@ -13,9 +13,12 @@ class AuthController extends BaseController
         $form = new \App\models\form\RegisterForm();
 
         if ($this->getRequest()->isPost() && $form->load($this->getRequest()->getPost(), '') && $form->validate()) {
+            if ($user = $form->signup()) {
+            }
         }
-        var_dump($form->getErrors());
-        var_dump($form->attributes());
+
+        $this->getLayout()->pushArrayVar('breadcrumb', 'register');
+
         $this->getView()->assign([
             'form' => $form
         ]);

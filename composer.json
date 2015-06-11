@@ -9,7 +9,8 @@
         "illuminate/database": "5.1.*",
         "illuminate/validation": "5.1.*",
         "symfony/translation": "2.7.*",
-        "ezyang/htmlpurifier": "4.6.0"
+        "ezyang/htmlpurifier": "4.6.0",
+        "illuminate/events": "5.1.*"
     },
     "autoload": {
         "psr-4": {

@@ -6,6 +6,7 @@
  * Time: 上午11:28
  */
 use Illuminate\Container\Container;
+use Illuminate\Validation\DatabasePresenceVerifier;
 use Illuminate\Validation\Factory;
 use Symfony\Component\Translation\Translator;
 
@@ -13,12 +14,15 @@ trait ValidatesModels
 {
     protected $validationFactory;
 
+    private $_errors;
+
     public function validate()
     {
 
         $validator = $this->getValidationFactory()->make($this->toArray(), $this->rules());
         if ($validator->fails()) {
-            return ($this->_errors = $validator->errors()->getMessages());
+            $this->_errors = $validator->errors()->getMessages();
+            return false;
         }
         return true;
     }
@@ -32,9 +36,9 @@ trait ValidatesModels
         if ($this->validationFactory) {
             return $this->validationFactory;
         }
-        $translator = new Translator('en');
-        $container = new Container();
+        $this->validationFactory =  new Factory(new Translator('en'), new Container());
+        $this->validationFactory->setPresenceVerifier(new DatabasePresenceVerifier(\Yaf\Registry::get('CapsuleDatabaseManager')));
+        return $this->validationFactory;
 
-        return $this->validationFactory =  new Factory($translator, $container);
     }
 }

@@ -5,9 +5,11 @@
  * Date: 15/5/27
  * Time: 上午10:46
  */
+use App\models\base\ValidatesModels;
+
 class UserModel extends \Illuminate\Database\Eloquent\Model
 {
-    use \App\models\base\ValidatesModels;
+    use ValidatesModels;
 
     protected $table = 'users';
 
@@ -18,7 +20,7 @@ class UserModel extends \Illuminate\Database\Eloquent\Model
     protected static function boot()
     {
         parent::boot();
-        UserModel::saving(function($user){
+        static::saving(function($user){
             return $user->validate($user->toArray(), $user->rules());
         });
     }
@@ -26,7 +28,7 @@ class UserModel extends \Illuminate\Database\Eloquent\Model
     public function rules()
     {
         return [
-            'username' => 'required|string|between:6,30',
+            'username' => 'required|string|between:6,30|unique:users',
             'age' => 'numeric',
             'phone' => 'numeric',
             'mobile' => 'numeric|length:11',

@@ -9,6 +9,7 @@ class BaseController extends Yaf\Controller_Abstract
         $this->_layout = \Yaf\Registry::get('Layout');
         
         $this->getLayout()->title = $this->getRequest()->getActionName() ."- Learn Yaf";
+        $this->getLayout()->breadcrumb = [['label' => 'Home', 'url' => "/"]];
     }
     
     public function getLayout()

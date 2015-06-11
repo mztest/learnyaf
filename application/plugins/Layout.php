@@ -40,7 +40,30 @@ class LayoutPlugin extends \Yaf\Plugin_Abstract
     {
         $this->_layoutVars[$name] = $value;
     }
-    
+
+    /**
+     * @param $name
+     * @return mixed
+     */
+    public function __get($name)
+    {
+        return $this->_layoutVars[$name];
+    }
+
+    /**
+     * @param string $name
+     * @param mixed $value
+     */
+    public function pushArrayVar($name, $value)
+    {
+        if (is_array($this->_layoutVars[$name])) {
+            $this->_layoutVars[$name][] = $value;
+        }
+    }
+
+    /**
+     * @param $layoutFile
+     */
     public function setLayout( $layoutFile )
     {
         $this->_layoutFile = $layoutFile;

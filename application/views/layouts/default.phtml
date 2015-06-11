@@ -13,6 +13,7 @@
 <body role="document">
 <?php echo $this->render('header.phtml'); ?>
 <div class="container" role="main">
+    <?php echo \App\helpers\HtmlHelper::breadcrumb($this->layout['breadcrumb']); ?>
     <?php echo $this->content; ?>
 </div>
 <?php echo $this->render('footer.phtml'); ?>
