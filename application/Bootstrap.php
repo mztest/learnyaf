@@ -8,16 +8,16 @@
  * 调用的次序, 和申明的次序相同
  */
 use Illuminate\Database\Capsule\Manager as Capsule;
-class Bootstrap extends \Yaf\Bootstrap_Abstract {
+class Bootstrap extends Yaf\Bootstrap_Abstract {
     public function _initConfig() {
         // 把配置保存起来
-        $config = \Yaf\Application::app()->getConfig();
-        \Yaf\Registry::set('config', $config);
+        $config = Yaf\Application::app()->getConfig();
+        Yaf\Registry::set('config', $config);
     }
-    public function _initPlugin(\Yaf\Dispatcher $dispatcher) {
+    public function _initPlugin(Yaf\Dispatcher $dispatcher) {
         // 注册一个插件
     }
-    public function _initRoute(\Yaf\Dispatcher $dispatcher) {
+    public function _initRoute(Yaf\Dispatcher $dispatcher) {
         // 在这里注册自己的路由协议,默认使用简单路由
     }
     
@@ -39,17 +39,24 @@ class Bootstrap extends \Yaf\Bootstrap_Abstract {
     }
 
     /**
-     *
-     * @param \Yaf\Dispatcher $dispatcher            
+     * Registry some classes what need to be pre-loaded.
      */
-    protected function _initLayout(\Yaf\Dispatcher $dispatcher) {
+    public function _initClasses() {
+        Yaf\Registry::set('Security', new \App\models\base\Security());
+    }
+
+    /**
+     *
+     * @param Yaf\Dispatcher $dispatcher
+     */
+    protected function _initLayout(Yaf\Dispatcher $dispatcher) {
         /*
          * layout allows boilerplate HTML to live in
          * /layouts/scripts rather than every script
          */
         $layout = new LayoutPlugin(
-                \Yaf\Registry::get('config')->get('layout.directory'),
-                \Yaf\Registry::get('config')->get('layout.file')
+                Yaf\Registry::get('config')->get('layout.directory'),
+                Yaf\Registry::get('config')->get('layout.file')
             );
         /*
          * Store a reference in the registry so values can be set later.
@@ -57,7 +64,7 @@ class Bootstrap extends \Yaf\Bootstrap_Abstract {
          * This is a hack to make up for the lack of a getPlugin
          * method in the dispatcher.
          */
-        \Yaf\Registry::set('Layout', $layout);
+        Yaf\Registry::set('Layout', $layout);
         /* add the plugin to the dispatcher */
         $dispatcher->registerPlugin($layout);
 

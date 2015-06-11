@@ -18,4 +18,15 @@ class UserController extends BaseController
             'users' => $users
         ]);
     }
+
+    public function viewAction()
+    {
+        $id = $this->getRequest()->getParam('id');
+        echo $id;
+        $user = UserModel::find($id);
+
+        print_r($user);
+        return false;
+    }
+
 }

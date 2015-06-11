@@ -26,7 +26,7 @@ use App\helpers\StringHelper;
  * @author Klimov Paul <klimov.paul@gmail.com>
  * @since 2.0
  */
-class SecurityHelper extends Object
+class Security extends Object
 {
     /**
      * Cipher algorithm for mcrypt module.
