@@ -36,7 +36,7 @@ trait ValidatesModels
         if ($this->validationFactory) {
             return $this->validationFactory;
         }
-        $this->validationFactory =  new Factory(new Translator('en'), new Container());
+        $this->validationFactory =  new Factory(\Yaf\Registry::get('Translator'), new Container());
         $this->validationFactory->setPresenceVerifier(new DatabasePresenceVerifier(\Yaf\Registry::get('CapsuleDatabaseManager')));
         return $this->validationFactory;
 

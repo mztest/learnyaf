@@ -8,7 +8,7 @@ use App\models\base\Model;
  * Time: 下午2:34
  */
 
-class RegisterForm extends Model
+class Register extends Model
 {
     public $username;
     public $password;

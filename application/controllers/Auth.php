@@ -6,11 +6,12 @@
  * Date: 15/6/8
  * Time: 下午3:23
  */
+use App\models\form\Register;
 class AuthController extends BaseController
 {
     public function registerAction()
     {
-        $form = new \App\models\form\RegisterForm();
+        $form = new Register();
 
         if ($this->getRequest()->isPost() && $form->load($this->getRequest()->getPost(), '') && $form->validate()) {
             if ($user = $form->signup()) {

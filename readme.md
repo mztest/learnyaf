@@ -7,6 +7,7 @@ Make sure of installing Yaf for PHP on your computer.
 
 Settings php.ini.
 
-> yaf.use_namespace=On
-
+```
+yaf.use_namespace=On
+```
 

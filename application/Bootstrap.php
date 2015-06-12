@@ -10,6 +10,9 @@
 use Illuminate\Database\Capsule\Manager as Capsule;
 use Illuminate\Events\Dispatcher;
 use Illuminate\Container\Container;
+use Illuminate\Translation\Translator;
+use Illuminate\Filesystem\Filesystem;
+use Illuminate\Translation\FileLoader;
 
 class Bootstrap extends Yaf\Bootstrap_Abstract {
     public function _initConfig() {
@@ -49,6 +52,14 @@ class Bootstrap extends Yaf\Bootstrap_Abstract {
      */
     public function _initClasses() {
         Yaf\Registry::set('Security', new \App\models\base\Security());
+
+        $filesystem = new Filesystem();
+        $locale = Yaf\Registry::get('config')->get('application.locale');
+        $path = APPLICATION_PATH.DIRECTORY_SEPARATOR.'application'.DIRECTORY_SEPARATOR.'messages';
+        $loader = new FileLoader($filesystem, $path);
+        $translator = new Translator($loader, $locale);
+        $translator->setFallback('en');
+        Yaf\Registry::set('Translator', $translator);
     }
 
     /**
