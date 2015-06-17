@@ -284,7 +284,7 @@ class User extends Object
             $duration,
         ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
         $cookie->expire = time() + $duration;
-        \Yaf\Registry::get('CookieCollection')->add($cookie);
+        \Yaf\Registry::get('Response')->getCookies()->add($cookie);
     }
 
     /**
@@ -343,13 +343,11 @@ class User extends Object
     {
         $session = \Yaf\Session::getInstance();
         $id = $session->get($this->idParam);
-
         if ($id === null) {
             $identity = null;
         } else {
             /* @var $class IdentityInterface */
             $class = $this->identityClass;
-            echo $class;
             $identity = $class::findIdentity($id);
         }
 
@@ -382,7 +380,7 @@ class User extends Object
      */
     protected function loginByCookie()
     {
-        $value = \Yaf\Registry::get('CookieCollection')->getValue($this->identityCookie['name']);
+        $value = \Yaf\Registry::get('Request')->getCookies()->getValue($this->identityCookie['name']);
         if ($value === null) {
             return;
         }
@@ -408,6 +406,7 @@ class User extends Object
                 $this->afterLogin($identity, true, $duration);
             }
         } else {
+            // log here.
         }
     }
 
@@ -419,14 +418,14 @@ class User extends Object
     protected function renewIdentityCookie()
     {
         $name = $this->identityCookie['name'];
-        $value = \Yaf\Registry::get('CookieCollection')->getValue($name);
+        $value = \Yaf\Registry::get('Request')->getCookies()->getValue($name);
         if ($value !== null) {
             $data = json_decode($value, true);
             if (is_array($data) && isset($data[2])) {
                 $cookie = new Cookie($this->identityCookie);
                 $cookie->value = $value;
                 $cookie->expire = time() + (int) $data[2];
-                \Yaf\Registry::get('CookieCollection')->add($cookie);
+                \Yaf\Registry::get('Response')->getCookies()->add($cookie);
             }
         }
     }

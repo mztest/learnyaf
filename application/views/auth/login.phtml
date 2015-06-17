@@ -24,8 +24,13 @@
         <?php endif; ?>
     </div>
 
-    <div class="checkbox">
-        <label><input type="checkbox" name="rememberMe"> Remember Me</label>
+    <div class="checkbox<?php echo ($form->hasErrors('rememberMe'))?" has-error":"";?>">
+        <label><input type="checkbox" name="rememberMe" value="1" <?php echo ($form->rememberMe) ? "checked='checked'":
+                "";?>> Remember
+            Me</label>
+        <?php if ($form->hasErrors('rememberMe')) :?>
+            <p class="help-block help-block-error"><?php echo $form->getFirstError('rememberMe'); ?></p>
+        <?php endif; ?>
     </div>
 
     <div class="form-group">

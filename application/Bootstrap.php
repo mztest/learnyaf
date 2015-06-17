@@ -40,9 +40,6 @@ class Bootstrap extends Yaf\Bootstrap_Abstract
         $translator->setFallback('en');
         Yaf\Registry::set('Translator', $translator);
 
-        // CookieCollection
-        Yaf\Registry::set('CookieCollection', new \App\models\web\CookieCollection());
-
         // WebUser
         $webUser = new \App\models\web\User([
             'identityClass' => 'UserModel',
@@ -53,6 +50,14 @@ class Bootstrap extends Yaf\Bootstrap_Abstract
 
     public function _initPlugin(Yaf\Dispatcher $dispatcher)
     {
+        // $dispatcher->registerPlugin(new DummyPlugin());
+
+        // Request
+        $requestPlugin = new RequestPlugin();
+        $requestPlugin->cookieValidationKey = Yaf\Registry::get('config')->get('application.cookieValidationKey');
+        $dispatcher->registerPlugin($requestPlugin);
+        Yaf\Registry::set('Request', $requestPlugin);
+
         /*
          * layout allows boilerplate HTML to live in
          * /layouts/scripts rather than every script
@@ -71,7 +76,10 @@ class Bootstrap extends Yaf\Bootstrap_Abstract
         /* add the plugin to the dispatcher */
         $dispatcher->registerPlugin($layout);
 
-
+        // Response
+        $responsePlugin = new ResponsePlugin();
+        $dispatcher->registerPlugin($requestPlugin);
+        Yaf\Registry::set('Response', $responsePlugin);
     }
 
     public function _initRoute(Yaf\Dispatcher $dispatcher)

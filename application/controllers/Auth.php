@@ -32,12 +32,19 @@ class AuthController extends BaseController
     {
         $form = new Login();
         if ($this->getRequest()->isPost() && $form->load($this->getRequest()->getPost(), '') && $form->login()) {
-            echo 'Login';
+            // echo 'Login';
+            $this->redirect('/');
         }
 
         $this->getLayout()->pushArrayVar('breadcrumb', 'login');
         $this->getView()->assign([
             'form' => $form
         ]);
+    }
+
+    public function logoutAction()
+    {
+        \Yaf\Registry::get('WebUser')->logout();
+        $this->redirect('/');
     }
 }
