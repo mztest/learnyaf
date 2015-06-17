@@ -6,8 +6,10 @@
  * Time: 上午10:46
  */
 use App\models\base\ValidatesModels;
+use App\models\web\IdentityInterface;
+use Illuminate\Database\Eloquent\Model;
 
-class UserModel extends \Illuminate\Database\Eloquent\Model
+class UserModel extends Model implements IdentityInterface
 {
     use ValidatesModels;
 
@@ -62,6 +64,43 @@ class UserModel extends \Illuminate\Database\Eloquent\Model
     public function generateAuthKey()
     {
         $this->auth_key = Yaf\Registry::get('Security')->generateRandomString();
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->{$this->getKeyName()};
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAuthKey()
+    {
+        return $this->auth_key;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function validateAuthKey($authKey)
+    {
+        return $this->getAuthKey() === $authKey;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public static function findIdentity($id)
+    {
+        return static::find($id);
+    }
+
+    public static function findByUsername($username)
+    {
+        return static::where('username', $username)->first();
     }
 
 }

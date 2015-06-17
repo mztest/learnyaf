@@ -12,7 +12,8 @@
         "ezyang/htmlpurifier": "4.6.0",
         "illuminate/events": "5.1.*",
         "illuminate/translation": "5.1.*",
-        "illuminate/filesystem": "5.1.*"
+        "illuminate/filesystem": "5.1.*",
+        "swiftmailer/swiftmailer": "5.4.*"
     },
     "autoload": {
         "psr-4": {

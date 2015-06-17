@@ -15,7 +15,7 @@ namespace App\models\base;
  * @author Qiang Xue <qiang.xue@gmail.com>
  * @since 2.0
  */
-class Exception extends \Exception
+class Exception extends \Yaf\Exception
 {
     /**
      * @return string the user-friendly name of this exception

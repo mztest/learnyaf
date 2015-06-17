@@ -7,6 +7,8 @@
  * Time: 下午3:23
  */
 use App\models\form\Register;
+use App\models\form\Login;
+
 class AuthController extends BaseController
 {
     public function registerAction()
@@ -28,6 +30,14 @@ class AuthController extends BaseController
 
     public function loginAction()
     {
+        $form = new Login();
+        if ($this->getRequest()->isPost() && $form->load($this->getRequest()->getPost(), '') && $form->login()) {
+            echo 'Login';
+        }
 
+        $this->getLayout()->pushArrayVar('breadcrumb', 'login');
+        $this->getView()->assign([
+            'form' => $form
+        ]);
     }
 }

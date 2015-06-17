@@ -144,6 +144,16 @@ abstract class Model extends Object implements Arrayable
     }
 
     /**
+     * Adds a new error to the specified attribute.
+     * @param string $attribute attribute name
+     * @param string $error new error message
+     */
+    public function addError($attribute, $error = '')
+    {
+        $this->_errors[$attribute][] = $error;
+    }
+
+    /**
      * Returns the first error of the specified attribute.
      * @param string $attribute attribute name.
      * @return string the error message. Null is returned if no error.

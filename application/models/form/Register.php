@@ -1,6 +1,4 @@
 <?php namespace App\models\form;
-use App\models\base\Model;
-
 /**
  * Created by PhpStorm.
  * User: guoxiaosong
@@ -8,7 +6,7 @@ use App\models\base\Model;
  * Time: 下午2:34
  */
 
-class Register extends Model
+class Register extends \App\models\base\Model
 {
     public $username;
     public $password;

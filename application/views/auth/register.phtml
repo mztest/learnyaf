@@ -1,4 +1,12 @@
-<form method="post">
+<?php
+/**
+ * Created by PhpStorm.
+ * User: guoxiaosong
+ * Date: 15/6/12
+ * Time: 上午10:50
+ */
+?>
+<form method="post" action="/auth/register">
     <div class="form-group <?php echo ($form->hasErrors('username'))?"has-error":"";?>">
         <label for="username">User name:</label>
         <input type="text" class="form-control" id="username" name="username" value="<?php echo $form->username; ?>"
