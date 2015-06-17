@@ -309,7 +309,7 @@ class User extends Object
             return;
         }
 
-        $session = \Yaf\Session::getInstance();
+        $session = \Yaf\Registry::get('Session');
         $session->del($this->idParam);
         $session->del($this->authTimeoutParam);
 
@@ -341,7 +341,7 @@ class User extends Object
      */
     protected function renewAuthStatus()
     {
-        $session = \Yaf\Session::getInstance();
+        $session = \Yaf\Registry::get('Session');
         $id = $session->get($this->idParam);
         if ($id === null) {
             $identity = null;
@@ -444,7 +444,7 @@ class User extends Object
      */
     public function getReturnUrl($defaultUrl = null)
     {
-        $session = \Yaf\Session::getInstance();
+        $session = \Yaf\Registry::get('Session');
         $url = $session->get($this->returnUrlParam, $defaultUrl);
         if (is_array($url)) {
             if (isset($url[0])) {
@@ -470,6 +470,6 @@ class User extends Object
      */
     public function setReturnUrl($url)
     {
-        \Yaf\Session::getInstance()->set($this->returnUrlParam, $url);
+        \Yaf\Registry::get('Session')->set($this->returnUrlParam, $url);
     }
 }

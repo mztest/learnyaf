@@ -28,7 +28,9 @@ class Bootstrap extends Yaf\Bootstrap_Abstract
      */
     public function _initClasses()
     {
-        // Request
+        // Sessoin
+        Yaf\Registry::set('Session', Yaf\Session::getInstance());
+
         // Request
         $request = new \App\models\web\Request();
         $request->cookieValidationKey = Yaf\Registry::get('config')->get('application.cookieValidationKey');
