@@ -28,6 +28,12 @@ class Bootstrap extends Yaf\Bootstrap_Abstract
      */
     public function _initClasses()
     {
+        // Request
+        // Request
+        $request = new \App\models\web\Request();
+        $request->cookieValidationKey = Yaf\Registry::get('config')->get('application.cookieValidationKey');
+        Yaf\Registry::set('Request', $request);
+
         // Security class
         Yaf\Registry::set('Security', new \App\models\base\Security());
 
@@ -46,18 +52,16 @@ class Bootstrap extends Yaf\Bootstrap_Abstract
             'enableAutoLogin' => true
         ]);
         Yaf\Registry::set('WebUser', $webUser);
+
+        // Response
+        $response = new \App\models\web\Response();
+        Yaf\Registry::set('Response', $response);
     }
 
     public function _initPlugin(Yaf\Dispatcher $dispatcher)
     {
         // $dispatcher->registerPlugin(new DummyPlugin());
-
-        // Request
-        $requestPlugin = new RequestPlugin();
-        $requestPlugin->cookieValidationKey = Yaf\Registry::get('config')->get('application.cookieValidationKey');
-        $dispatcher->registerPlugin($requestPlugin);
-        Yaf\Registry::set('Request', $requestPlugin);
-
+        $dispatcher->registerPlugin(new CookiePlugin());
         /*
          * layout allows boilerplate HTML to live in
          * /layouts/scripts rather than every script
@@ -75,11 +79,6 @@ class Bootstrap extends Yaf\Bootstrap_Abstract
         Yaf\Registry::set('Layout', $layout);
         /* add the plugin to the dispatcher */
         $dispatcher->registerPlugin($layout);
-
-        // Response
-        $responsePlugin = new ResponsePlugin();
-        $dispatcher->registerPlugin($requestPlugin);
-        Yaf\Registry::set('Response', $responsePlugin);
     }
 
     public function _initRoute(Yaf\Dispatcher $dispatcher)

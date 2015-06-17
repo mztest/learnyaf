@@ -30,6 +30,9 @@ class AuthController extends BaseController
 
     public function loginAction()
     {
+        if (!\Yaf\Registry::get('WebUser')->getIsGuest()) {
+            $this->redirect('/');
+        }
         $form = new Login();
         if ($this->getRequest()->isPost() && $form->load($this->getRequest()->getPost(), '') && $form->login()) {
             // echo 'Login';

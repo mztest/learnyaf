@@ -29,9 +29,9 @@
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="/auth/register">Register</a></li>
                 <?php if (\Yaf\Registry::get('WebUser')->getIsGuest()) :?>
-                <li><a href="/auth/login">Login</a></li>
+                    <li><a href="/auth/register">Register</a></li>
+                    <li><a href="/auth/login">Login</a></li>
                 <?php else: ?>
                 <li><a href="/auth/logout" data-method="post">Logout (
                         <?php echo \Yaf\Registry::get('WebUser')->getIdentity()->username; ?>)</a></li>

@@ -325,7 +325,7 @@ class User extends Object
                 $this->sendIdentityCookie($identity, $duration);
             }
         } elseif ($this->enableAutoLogin) {
-            \Yaf\Registry::get('CookieCollection')->remove(new Cookie($this->identityCookie));
+            \Yaf\Registry::get('Response')->getCookies()->remove(new Cookie($this->identityCookie));
         }
     }
 

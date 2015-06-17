@@ -134,6 +134,7 @@ class LayoutPlugin extends \Yaf\Plugin_Abstract
      */
     public function dispatchLoopShutdown(Request $request, Response $response)
     {
+//        var_dump('dispatchLoopShutdown');
     }
 
 

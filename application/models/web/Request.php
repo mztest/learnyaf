@@ -1,14 +1,14 @@
-<?php
+<?php namespace App\models\web;
 /**
  * Created by PhpStorm.
  * User: guoxiaosong
  * Date: 15/6/17
  * Time: 下午1:52
  */
-use App\models\web\CookieCollection;
-use App\models\web\Cookie;
 
-class RequestPlugin extends \Yaf\Plugin_Abstract
+use App\models\base\Exception;
+
+class Request extends \App\models\base\Object
 {
     /**
      * @var boolean whether cookies should be validated to ensure they are not tampered. Defaults to true.
@@ -20,12 +20,6 @@ class RequestPlugin extends \Yaf\Plugin_Abstract
     public $cookieValidationKey;
 
     private $_cookies;
-
-    public function routerShutdown(Yaf\Request_Abstract $request, Yaf\Response_Abstract $response)
-    {
-        /* 路由完成后，在这个钩子里，你可以做登陆检测等功能*/
-//        var_dump("routerShutdown");
-    }
 
     /**
      * Returns the cookie collection.
@@ -67,7 +61,7 @@ class RequestPlugin extends \Yaf\Plugin_Abstract
                 throw new Exception(get_class($this) . '::cookieValidationKey must be configured with a secret key.');
             }
             foreach ($_COOKIE as $name => $value) {
-                if (is_string($value) && ($value = Yaf\Registry::get('Security')->validateData($value,
+                if (is_string($value) && ($value = \Yaf\Registry::get('Security')->validateData($value,
                         $this->cookieValidationKey)) !== false) {
                     $cookies[$name] = new Cookie([
                         'name' => $name,
