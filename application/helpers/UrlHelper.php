@@ -144,11 +144,6 @@ class UrlHelper
         $route = trim($params[0], '/');
         unset($params[0]);
 
-        var_dump($route);
-
-        $yafRequest = \Yaf\Application::app()->getDispatcher()->getRequest();
-
-
         if (!empty($params)) {
             if (strpos($route, 'index') === 0 && ($query = http_build_query($params)) !== '') {
                 $route .= '?' . $query;
