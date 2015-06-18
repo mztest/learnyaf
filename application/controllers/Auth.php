@@ -35,7 +35,6 @@ class AuthController extends BaseController
         }
         $form = new Login();
         if ($this->getRequest()->isPost() && $form->load($this->getRequest()->getPost(), '') && $form->login()) {
-            // echo 'Login';
             $this->redirect('/');
         }
 

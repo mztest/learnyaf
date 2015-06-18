@@ -82,4 +82,118 @@ class Request extends \App\models\base\Object
 
         return $cookies;
     }
+
+    private $_hostInfo;
+
+    /**
+     * Returns the schema and host part of the current request URL.
+     * The returned URL does not have an ending slash.
+     * By default this is determined based on the user request information.
+     * You may explicitly specify it by setting the [[setHostInfo()|hostInfo]] property.
+     * @return string schema and hostname part (with port number if needed) of the request URL (e.g. `http://www.yiiframework.com`)
+     * @see setHostInfo()
+     */
+    public function getHostInfo()
+    {
+        if ($this->_hostInfo === null) {
+            $secure = $this->getIsSecureConnection();
+            $http = $secure ? 'https' : 'http';
+            if (isset($_SERVER['HTTP_HOST'])) {
+                $this->_hostInfo = $http . '://' . $_SERVER['HTTP_HOST'];
+            } else {
+                $this->_hostInfo = $http . '://' . $_SERVER['SERVER_NAME'];
+                $port = $secure ? $this->getSecurePort() : $this->getPort();
+                if (($port !== 80 && !$secure) || ($port !== 443 && $secure)) {
+                    $this->_hostInfo .= ':' . $port;
+                }
+            }
+        }
+
+        return $this->_hostInfo;
+    }
+
+    /**
+     * Sets the schema and host part of the application URL.
+     * This setter is provided in case the schema and hostname cannot be determined
+     * on certain Web servers.
+     * @param string $value the schema and host part of the application URL. The trailing slashes will be removed.
+     */
+    public function setHostInfo($value)
+    {
+        $this->_hostInfo = rtrim($value, '/');
+    }
+
+    /**
+     * Return if the request is sent via secure channel (https).
+     * @return boolean if the request is sent via secure channel (https)
+     */
+    public function getIsSecureConnection()
+    {
+        return isset($_SERVER['HTTPS']) && (strcasecmp($_SERVER['HTTPS'], 'on') === 0 || $_SERVER['HTTPS'] == 1)
+        || isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && strcasecmp($_SERVER['HTTP_X_FORWARDED_PROTO'], 'https') === 0;
+    }
+
+    private $_port;
+
+    /**
+     * Returns the port to use for insecure requests.
+     * Defaults to 80, or the port specified by the server if the current
+     * request is insecure.
+     * @return integer port number for insecure requests.
+     * @see setPort()
+     */
+    public function getPort()
+    {
+        if ($this->_port === null) {
+            $this->_port = !$this->getIsSecureConnection() && isset($_SERVER['SERVER_PORT']) ? (int) $_SERVER['SERVER_PORT'] : 80;
+        }
+
+        return $this->_port;
+    }
+
+    /**
+     * Sets the port to use for insecure requests.
+     * This setter is provided in case a custom port is necessary for certain
+     * server configurations.
+     * @param integer $value port number.
+     */
+    public function setPort($value)
+    {
+        if ($value != $this->_port) {
+            $this->_port = (int) $value;
+            $this->_hostInfo = null;
+        }
+    }
+
+    private $_securePort;
+
+    /**
+     * Returns the port to use for secure requests.
+     * Defaults to 443, or the port specified by the server if the current
+     * request is secure.
+     * @return integer port number for secure requests.
+     * @see setSecurePort()
+     */
+    public function getSecurePort()
+    {
+        if ($this->_securePort === null) {
+            $this->_securePort = $this->getIsSecureConnection() && isset($_SERVER['SERVER_PORT']) ? (int) $_SERVER['SERVER_PORT'] : 443;
+        }
+
+        return $this->_securePort;
+    }
+
+    /**
+     * Sets the port to use for secure requests.
+     * This setter is provided in case a custom port is necessary for certain
+     * server configurations.
+     * @param integer $value port number.
+     */
+    public function setSecurePort($value)
+    {
+        if ($value != $this->_securePort) {
+            $this->_securePort = (int) $value;
+            $this->_hostInfo = null;
+        }
+    }
 }

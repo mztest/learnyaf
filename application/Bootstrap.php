@@ -19,7 +19,7 @@ class Bootstrap extends Yaf\Bootstrap_Abstract
     public function _initConfig()
     {
         // 把配置保存起来
-        $config = Yaf\Application::app()->getConfig();
+        $config = \Yaf\Application::app()->getConfig();
         Yaf\Registry::set('config', $config);
     }
 
