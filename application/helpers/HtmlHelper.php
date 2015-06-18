@@ -30,4 +30,44 @@ class HtmlHelper
         $html .= '</ol>';
         return $html;
     }
+
+    /**
+     * @param array $items
+     * @param array $options
+     * @return string|void
+     */
+    public static function navbar(array $items, array $options=[])
+    {
+        if (empty($items)) {
+            return;
+        }
+        if (isset($options['containerClass'])) {
+            $html = '<ul class="'.$options['containerClass'].'">';
+        } else {
+            $html = '<ul class="nav navbar-nav">';
+        }
+
+        foreach($items as $item) {
+            if (isset($item['items']) && is_array($item['items'])) {
+                $html .= '<li class="dropdown">'
+                    .'<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                aria-expanded="false">'.$item['label'].' <span class="caret"></span></a>';
+
+                $html .= '<ul class="dropdown-menu" role="menu">';
+                foreach($item['items'] as $subItem) {
+                    if (is_string($subItem)) {
+                        $html .= $subItem;
+                    } else {
+                        $html .= '<li><a href="'.$subItem['url'].'">'.$subItem['label'].'</a>';
+                    }
+                }
+                $html .= '</ul>';
+            } else {
+                $html .= '<li><a href="'.$item['url'].'">'.$item['label'].'</a>';
+            }
+            $html .= '</li>';
+        }
+        $html .= '</ul>';
+        return $html;
+    }
 }
