@@ -5,6 +5,8 @@
  * Date: 15/6/11
  * Time: 下午3:28
  */
+use App\helpers\UrlHelper as Url;
+
 class HtmlHelper
 {
     /**
@@ -48,6 +50,7 @@ class HtmlHelper
         }
 
         foreach($items as $item) {
+            $isActive = Url::isItemActive($item);
             if (isset($item['items']) && is_array($item['items'])) {
                 $html .= '<li class="dropdown">'
                     .'<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
@@ -58,12 +61,14 @@ class HtmlHelper
                     if (is_string($subItem)) {
                         $html .= $subItem;
                     } else {
-                        $html .= '<li><a href="'.$subItem['url'].'">'.$subItem['label'].'</a>';
+                        $html .= '<li><a href="'.Url::toRoute($subItem['url']).'">'.$subItem['label'].'</a></li>';
                     }
                 }
                 $html .= '</ul>';
             } else {
-                $html .= '<li><a href="'.$item['url'].'">'.$item['label'].'</a>';
+                $html .= '<li'.(($isActive) ? " class='active'":"").'><a href="'.Url::toRoute($item['url']).'">'
+                    .$item['label']
+                    .'</a>';
             }
             $html .= '</li>';
         }

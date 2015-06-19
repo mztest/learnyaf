@@ -65,23 +65,16 @@ class UrlHelper
      * @param array $item the menu item to be checked
      * @return boolean whether the menu item is active
      */
-    public function isItemActive($url)
+    public static function isItemActive($item)
     {
+        $request = \Yaf\Registry::get('Request');
         if (isset($item['url']) && is_array($item['url']) && isset($item['url'][0])) {
             $route = $item['url'][0];
-            if ($route[0] !== '/' && Yii::$app->controller) {
-                $route = Yii::$app->controller->module->getUniqueId() . '/' . $route;
+            if ($route[0] !== '/' && 'index' !== $request->getModuleName()) {
+                $route =  $request->getModuleName() . '/' . $route;
             }
-            if (ltrim($route, '/') !== $this->route) {
+            if (ltrim($route, '/') !== $request->getRoute()) {
                 return false;
-            }
-            unset($item['url']['#']);
-            if (count($item['url']) > 1) {
-                foreach (array_splice($item['url'], 1) as $name => $value) {
-                    if ($value !== null && (!isset($this->params[$name]) || $this->params[$name] != $value)) {
-                        return false;
-                    }
-                }
             }
 
             return true;
@@ -114,13 +107,9 @@ class UrlHelper
             return ltrim($route, '/');
         }
 
-        $yafRequest = \Yaf\Application::app()->getDispatcher()->getRequest();
-        // relative route
-        if ($yafRequest === null) {
-            throw new Exception("Unable to resolve the relative route: $route. No active controller is available.");
-        }
-        $moduleName = strtolower($yafRequest->getModuleName());
-        $controllerName = strtolower($yafRequest->getControllerName());
+        $request = \Yaf\Registry::get('Request');
+        $moduleName = $request->getModuleName();
+        $controllerName = $request->getControllerName();
 
         if (strpos($route, '/') === false) {
             // empty or an action ID

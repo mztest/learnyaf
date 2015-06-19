@@ -196,4 +196,90 @@ class Request extends \App\models\base\Object
             $this->_hostInfo = null;
         }
     }
+
+    private $_route;
+
+    public function getRoute()
+    {
+        if ($this->_route === null) {
+            $this->_route = $this->getControllerName() . '/'. $this->getActionName();
+            if ('index' != $this->getModuleName()) {
+                $this->_route = $this->getModuleName() .'/'. $this->_route;
+            }
+        }
+
+        return $this->_route;
+    }
+
+    private $_yafRequest;
+
+    /**
+     * @return mixed
+     */
+    public function getYafRequest()
+    {
+        if ($this->_yafRequest === null) {
+            $this->_yafRequest = \Yaf\Application::app()->getDispatcher()->getRequest();
+        }
+        return $this->_yafRequest;
+    }
+
+    private $_moduleName;
+
+    /**
+     * @return string
+     */
+    public function getModuleName()
+    {
+        if ($this->_moduleName === null) {
+            $this->_moduleName = strtolower($this->getYafRequest()->getModuleName());
+        }
+        return $this->_moduleName;
+    }
+
+    private $_controllerName;
+
+    /**
+     * @return string
+     */
+    public function getControllerName()
+    {
+        if ($this->_controllerName === null) {
+            $this->_controllerName = strtolower($this->getYafRequest()->getControllerName());
+        }
+        return $this->_controllerName;
+    }
+
+    private $_actionName;
+
+    /**
+     * @return string
+     */
+    public function getActionName()
+    {
+        if ($this->_actionName === null) {
+            $this->_actionName = strtolower($this->getYafRequest()->getActionName());
+        }
+        return $this->_actionName;
+    }
+
+    private $_homeUrl;
+
+    /**
+     * @return string
+     */
+    public function getHomeUrl()
+    {
+        if ($this->_homeUrl === null) {
+            $defaultModule = \Yaf\Registry::get('config').get('application.dispatcher.defaultModule');
+            $defaultController = \Yaf\Registry::get('config').get('application.dispatcher.defaultController');
+            $defaultAction = \Yaf\Registry::get('config').get('application.dispatcher.defaultAction');
+
+            $this->_homeUrl = $defaultController .'/'. $defaultAction;
+            if ('index' != $defaultModule) {
+                $this->_homeUrl = $defaultModule .'/'. $this->_homeUrl;
+            }
+        }
+        return $this->_homeUrl;
+    }
 }
