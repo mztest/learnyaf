@@ -5,8 +5,11 @@
  * Date: 15/6/19
  * Time: 下午1:42
  */
+use App\Helpers\UrlHelper as Url;
+
 ?>
 <h2>Hotel Lists</h2>
+<?php echo $models->render(); ?>
 <table class="table table-hover table-condensed">
     <thead>
     <tr>
@@ -21,7 +24,8 @@
     <?php foreach($models as $model): ?>
         <tr>
             <th><?php echo $model->hotel_id; ?></th>
-            <th><?php echo $model->name; ?></th>
+            <th><?php echo '<a href="'.Url::toRoute(['/hotel/view', 'id' => $model->id]).'">'. $model->name .'</a>';
+                ?></th>
             <th><?php echo $model->ename; ?></th>
             <th><?php echo $model->country; ?></th>
             <th><?php echo $model->location; ?></th>

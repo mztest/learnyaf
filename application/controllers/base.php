@@ -10,9 +10,7 @@ class BaseController extends Yaf\Controller_Abstract
     {
         $this->_layout = \Yaf\Registry::get('Layout');
         
-        $this->getLayout()->title = $this->getRequest()->getControllerName() .'-'. $this->getRequest()->getActionName
-    () ."-
-        Learn Yaf";
+        $this->getLayout()->title = "Learn Yaf";
         $this->getLayout()->breadcrumb = [['label' => 'Home', 'url' => "/"]];
 
 
@@ -21,7 +19,7 @@ class BaseController extends Yaf\Controller_Abstract
         });
 
         Paginator::currentPageResolver(function ($pageName = 'page') {
-            return $this->getRequest()->getQuery($pageName);
+            return $this->getRequest()->get($pageName);
         });
     }
     
