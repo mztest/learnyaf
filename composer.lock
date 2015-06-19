@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "e4a6fbf4320e684a0771180ef03a47fa",
+    "hash": "1dd63b911fc41d99de8a7899b8a01d6e",
     "packages": [
         {
             "name": "danielstjules/stringy",
@@ -355,7 +355,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/contracts/zipball/c086e4da4c2e4914e421b37f4ed4643abdc1d024",
+                "url": "https://api.github.com/repos/illuminate/contracts/zipball/af309aa2b64a5b8357ab3af36356607c3d4ad753",
                 "reference": "c086e4da4c2e4914e421b37f4ed4643abdc1d024",
                 "shasum": ""
             },
@@ -397,7 +397,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/database/zipball/1a6673f223ac10554fe30c343273e5aa5e08b049",
+                "url": "https://api.github.com/repos/illuminate/database/zipball/cb723cf5feebcdfe9fc020a53e4d64e3ddc9eeb8",
                 "reference": "5caf790c13e62a97064fd921fca1abab2429bf08",
                 "shasum": ""
             },
@@ -507,7 +507,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/filesystem/zipball/8e066137195a9d3df0d2c2d878a28aa984710e1b",
+                "url": "https://api.github.com/repos/illuminate/filesystem/zipball/9417c580556600bc478506f9690c659b025b3f0f",
                 "reference": "8e066137195a9d3df0d2c2d878a28aa984710e1b",
                 "shasum": "",
                 "mirrors": [
@@ -554,6 +554,50 @@
             "time": "2015-06-10 07:05:55"
         },
         {
+            "name": "illuminate/pagination",
+            "version": "5.1.x-dev",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/illuminate/pagination.git",
+                "reference": "b77a69a0486f7b8574bbf146268e0c8d056cfbd2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/illuminate/pagination/zipball/b77a69a0486f7b8574bbf146268e0c8d056cfbd2",
+                "reference": "b77a69a0486f7b8574bbf146268e0c8d056cfbd2",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/contracts": "5.1.*",
+                "illuminate/support": "5.1.*",
+                "php": ">=5.5.9"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "5.1-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Illuminate\\Pagination\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Taylor Otwell",
+                    "email": "taylorotwell@gmail.com"
+                }
+            ],
+            "description": "The Illuminate Pagination package.",
+            "homepage": "http://laravel.com",
+            "time": "2015-06-11 14:28:36"
+        },
+        {
             "name": "illuminate/support",
             "version": "5.1.x-dev",
             "source": {
@@ -563,7 +607,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/support/zipball/31ff1c36876226c78f497bcbeb96208c80ed8b1e",
+                "url": "https://api.github.com/repos/illuminate/support/zipball/f9d1aefe55ecb7b16a09d6f522c682d544b8ec24",
                 "reference": "2d690ec790500bafdcd10f8db35e18b3a1cf957d",
                 "shasum": ""
             },
@@ -622,7 +666,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/translation/zipball/b95e0de056cd27c3bea754b3d54942fef22332fd",
+                "url": "https://api.github.com/repos/illuminate/translation/zipball/f1c18ee4611f30f2b597e26568c73f688a5f8c4b",
                 "reference": "b95e0de056cd27c3bea754b3d54942fef22332fd",
                 "shasum": "",
                 "mirrors": [
@@ -673,7 +717,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/validation/zipball/dfd6067e38e50b3a3f75d6e17bb151bd44edaa2a",
+                "url": "https://api.github.com/repos/illuminate/validation/zipball/1f87c9d997e15240c04c63c55d17aa479e826b74",
                 "reference": "0dad1a72d9e254d263a8d19a0e61584ae077ea68",
                 "shasum": ""
             },
@@ -829,7 +873,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Finder/zipball/c13a40d638aeede1e8400f8c956c7f9246c05f75",
+                "url": "https://api.github.com/repos/symfony/Finder/zipball/f71c7584e940ccdfb56af376b673dc7b4e0750f1",
                 "reference": "c13a40d638aeede1e8400f8c956c7f9246c05f75",
                 "shasum": "",
                 "mirrors": [
@@ -884,7 +928,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/HttpFoundation/zipball/4f363c426b0ced57e3d14460022feb63937980ff",
+                "url": "https://api.github.com/repos/symfony/HttpFoundation/zipball/dae71884e7bb18a41b077ed6dfad9ef649da21e5",
                 "reference": "2e054bdea4105a4120f7f579ba8b01a0991f63aa",
                 "shasum": ""
             },

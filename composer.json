@@ -13,7 +13,8 @@
         "illuminate/events": "5.1.*",
         "illuminate/translation": "5.1.*",
         "illuminate/filesystem": "5.1.*",
-        "swiftmailer/swiftmailer": "5.4.*"
+        "swiftmailer/swiftmailer": "5.4.*",
+        "illuminate/pagination": "5.1.*"
     },
     "autoload": {
         "psr-4": {

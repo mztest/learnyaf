@@ -1,4 +1,5 @@
 <?php
+use Illuminate\Pagination\Paginator;
 
 class BaseController extends Yaf\Controller_Abstract
 {
@@ -13,6 +14,15 @@ class BaseController extends Yaf\Controller_Abstract
     () ."-
         Learn Yaf";
         $this->getLayout()->breadcrumb = [['label' => 'Home', 'url' => "/"]];
+
+
+        Paginator::currentPathResolver(function () {
+            return '/'. \Yaf\Registry::get('Request')->getRoute();
+        });
+
+        Paginator::currentPageResolver(function ($pageName = 'page') {
+            return $this->getRequest()->getQuery($pageName);
+        });
     }
     
     public function getLayout()
