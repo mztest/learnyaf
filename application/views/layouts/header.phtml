@@ -37,7 +37,8 @@ use App\helpers\HtmlHelper as Html;
                 ];
             } else {
                 $items = [
-                    ['label' => 'Logout ('.\Yaf\Registry::get('WebUser')->getIdentity()->username.')', 'url' => Url::toRoute('/auth/logout')],
+                    ['label' => 'Logout ('.\Yaf\Registry::get('WebUser')->getIdentity()->username.')', 'url' =>
+                        ['/auth/logout']],
                 ];
             }
             echo Html::navbar($items, ['containerClass' => 'nav navbar-nav navbar-right']);
