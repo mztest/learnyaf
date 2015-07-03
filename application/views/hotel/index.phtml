@@ -24,7 +24,8 @@ use App\Helpers\UrlHelper as Url;
     <?php foreach($models as $model): ?>
         <tr>
             <th><?php echo $model->hotel_id; ?></th>
-            <th><?php echo '<a href="'.Url::toRoute(['/hotel/view', 'id' => $model->id]).'">'. $model->name .'</a>';
+            <th><?php echo '<a href="'.Url::toRoute(['/hotel/view', 'id' => $model->id]).'" data-toggle="tooltip"
+             title="'.$model->location.'">'. $model->name .'</a>';
                 ?></th>
             <th><?php echo $model->ename; ?></th>
             <th><?php echo $model->country; ?></th>
