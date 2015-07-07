@@ -35,6 +35,7 @@ class AuthController extends BaseController
         }
         $form = new Login();
         if ($this->getRequest()->isPost() && $form->load($this->getRequest()->getPost(), '') && $form->login()) {
+            Yaf\Registry::get('Response')->sendCookies();
             $this->redirect('/');
         }
 
@@ -47,6 +48,7 @@ class AuthController extends BaseController
     public function logoutAction()
     {
         \Yaf\Registry::get('WebUser')->logout();
+        Yaf\Registry::get('Response')->sendCookies();
         $this->redirect('/');
     }
 }

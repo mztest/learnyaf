@@ -36,4 +36,18 @@ class Response extends \App\models\base\Object
         }
         return $this->_cookies;
     }
+
+    public function sendCookies()
+    {
+        $cookies = $this->getCookies();
+        $validationKey = \Yaf\Registry::get('config')->get('application.cookieValidationKey');
+        foreach($cookies as $cookie) {
+            $value = $cookie->value;
+            if ($cookie->expire != 1  && isset($validationKey)) {
+                $value = \Yaf\Registry::get('Security')->hashData(serialize($value), $validationKey);
+            }
+            setcookie($cookie->name, $value, $cookie->expire, $cookie->path, $cookie->domain, $cookie->secure, $cookie->httpOnly);
+        }
+        $cookies->removeAll();
+    }
 }
