@@ -6,6 +6,7 @@
  * Time: 下午1:42
  */
 use App\Helpers\UrlHelper as Url;
+use Illuminate\Database\Capsule\Manager as Capsule;
 
 ?>
 <h2>Hotel Lists</h2>
@@ -23,13 +24,13 @@ use App\Helpers\UrlHelper as Url;
     <tbody>
     <?php foreach($models as $model): ?>
         <tr>
-            <th><?php echo $model->hotel_id; ?></th>
-            <th><?php echo '<a href="'.Url::toRoute(['/hotel/view', 'id' => $model->id]).'" data-toggle="tooltip"
+            <td><?php echo $model->hotel_id; ?></td>
+            <td><?php echo '<a href="'.Url::toRoute(['/hotel/view', 'id' => $model->id]).'" data-toggle="tooltip"
              title="'.$model->location.'">'. $model->name .'</a>';
-                ?></th>
-            <th><?php echo $model->ename; ?></th>
-            <th><?php echo $model->country; ?></th>
-            <th><?php echo $model->location; ?></th>
+                ?></td>
+            <td><?php echo $model->ename; ?></td>
+            <td><?php echo $model->country; ?></td>
+            <td><?php echo $model->location; ?></td>
         </tr>
     <?php endforeach; ?>
     </tbody>
